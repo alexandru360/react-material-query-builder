@@ -18,7 +18,7 @@ export interface ComboBoxKeyValue {
 export default function ComboBox(props: ComboBoxProps) {
     const defaultProps = {
         options: props.options,
-        getOptionLabel: (option: ComboBoxKeyValue) => option.key,
+        getOptionLabel: (option: ComboBoxKeyValue) => option.value,
     };
 
     return (
