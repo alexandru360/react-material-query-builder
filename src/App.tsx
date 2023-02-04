@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+import Operations from "./components/operations/Operations";
 
 function App() {
     return (
         <React.Fragment>
-            <p>Everything works :)</p>
-            <p>Launch the StoryBook</p>
+            <div style={{margin: "20px"}}>
+                <Operations />
+            </div>
         </React.Fragment>
     );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {SpeedDial, SpeedDialAction, SpeedDialIcon} from "@mui/material";
+import {SpeedDial, SpeedDialAction} from "@mui/material";
 import {AddCircle, Remove, ViewStream} from "@mui/icons-material";
 
 export interface AddButtonProps {

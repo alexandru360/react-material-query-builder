@@ -7,7 +7,6 @@ import OperatorButtons, {OperatorButtonsProps} from "../components/operator-butt
 export default {
     title: 'Buttons/Operator buttons',
     component: OperatorButtons,
-
 } as ComponentMeta<typeof OperatorButtons>;
 
 const clickHandler = (param: any) => {console.log("Click handler called with: " + param)};

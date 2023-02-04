@@ -1,4 +1,4 @@
-import {ComboBoxKeyValue} from "../components/combobox/ComboBox";
+import KeyValueEntity from "./key-value-entity";
 
 const arrOperationsIds = [
     "StartsWidth",
@@ -89,7 +89,7 @@ export const LightOperationMatrixModel = () => {
         const operationMatrixItem = {
             key: arrOperationsIds[i],
             value: arrOperationsNames[i]
-        } as ComboBoxKeyValue;
+        } as KeyValueEntity;
         ret.push(operationMatrixItem);
     }
 
