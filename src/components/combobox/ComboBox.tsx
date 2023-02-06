@@ -12,6 +12,7 @@ export interface ComboBoxProps {
 }
 
 export default function ComboBox(props: ComboBoxProps) {
+
     const defaultProps = {
         options: props.options,
         getOptionLabel: (option: KeyValueEntity) => option.value,
@@ -22,7 +23,7 @@ export default function ComboBox(props: ComboBoxProps) {
             <Autocomplete
                 {...defaultProps}
                 id="disable-close-on-select"
-                renderInput={(params: any) => <TextField {...params} label={props.label} variant="standard" />}
+                renderInput={ (params: any) => <TextField {...params} label={props.label} variant="standard" /> }
                 onChange={(event: any, value: any) => props.onChange(value)}
             />
         </Stack>

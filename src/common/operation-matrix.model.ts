@@ -66,6 +66,12 @@ const arrOperator = [
     "Or",
 ]
 
+export enum OperationApplyingField {
+    String = 'String',
+    Number = 'Number',
+    Date = 'Date',
+}
+
 const OperationMatrixModel = () => {
     const ret = [];
 
@@ -106,12 +112,6 @@ export class OperationMatrixItem {
 export class OperationMatrixItemType {
     operationApplyingField: Array<OperationApplyingField> | any = [];
     operationOperator: string | any = '';
-}
-
-export enum OperationApplyingField {
-    String = 'String',
-    Number = 'Number',
-    Date = 'Date',
 }
 
 export default OperationMatrixModel;

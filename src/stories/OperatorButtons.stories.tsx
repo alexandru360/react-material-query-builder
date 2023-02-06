@@ -12,8 +12,8 @@ export default {
 const clickHandler = (param: any) => {console.log("Click handler called with: " + param)};
 
 const operatorProps = {
-    andClick: () => clickHandler("And"),
-    orClick: () => clickHandler("Or"),
+    handleOperationTypeClick: (par: any) => clickHandler(par),
+    handleLogicalOperationClick: (par: any) => clickHandler(par),
     addClick: () => clickHandler("Add")
 } as OperatorButtonsProps;
 

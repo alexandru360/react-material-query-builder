@@ -13,24 +13,22 @@ export interface ConditionRowProps {
 
 export default function ConditionRow(props: ConditionRowProps) {
 
-    const [showOperation, setShowOperation] = React.useState<boolean>(false);
-    const [cbxOperatorOpt, setCbxOperatorOpt] = React.useState<ComboBoxProps>({} as ComboBoxProps);
+    const [showOpFlag, setShowOpFlag] = React.useState<boolean>(false);
+    const [cbxFieldList, setCbxFieldList] = React.useState<ComboBoxProps>({} as ComboBoxProps);
 
     React.useEffect(() => {
         const operatorOptions = {
             options: props.arrFields,
             label: "Select Field",
-            onChange: handleOperatorChange,
+            onChange: (value: string) => {
+                console.log(value);
+                setShowOpFlag(!showOpFlag);
+            },
             width: "100%"
         } as ComboBoxProps;
 
-        setCbxOperatorOpt(operatorOptions);
-    }, []);
-
-    const handleOperatorChange = (value: string) => {
-        console.log(value);
-        setShowOperation(!showOperation);
-    };
+        setCbxFieldList(operatorOptions);
+    }, [props.arrFields]);
 
     return (
         <React.Fragment>
@@ -38,13 +36,13 @@ export default function ConditionRow(props: ConditionRowProps) {
                 <CardContent>
                     <Grid container rowSpacing={1} spacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}}>
                         <Grid item xs>
-                            <ComboBox {...cbxOperatorOpt} />
+                            {cbxFieldList && <ComboBox {...cbxFieldList} />}
                         </Grid>
                         <Grid item xs>
-                            {showOperation && <ComboBox {...operatorOptions} />}
+                            {showOpFlag && <ComboBox {...operatorOptions} />}
                         </Grid>
                         <Grid item xs>
-                            {showOperation && <TextField id="standard-basic" label="Enter Value" variant="standard"/>}
+                            {showOpFlag && <TextField id="standard-basic" label="Enter Value" variant="standard"/>}
                         </Grid>
                         <Grid item xs>
                             <IconButton aria-label="delete" color="primary" onClick={() => props.btnDeleteClick}>
