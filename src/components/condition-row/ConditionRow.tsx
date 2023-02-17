@@ -6,12 +6,13 @@ import ComboBox, {ComboBoxProps} from "../combobox/ComboBox";
 import TextField from "@mui/material/TextField";
 import operatorOptions from "../../common/operator-options";
 
-export interface ConditionRowProps {
+export interface IConditionRowProps {
     arrFields: Array<KeyValueEntity>;
-    btnDeleteClick: (value: string) => void;
+    btnDeleteClick: (value: number) => void;
+    idx: number;
 }
 
-export default function ConditionRow(props: ConditionRowProps) {
+export default function ConditionRow(props: IConditionRowProps) {
 
     const [showOpFlag, setShowOpFlag] = React.useState<boolean>(false);
     const [cbxFieldList, setCbxFieldList] = React.useState<ComboBoxProps>({} as ComboBoxProps);
@@ -45,7 +46,8 @@ export default function ConditionRow(props: ConditionRowProps) {
                             {showOpFlag && <TextField id="standard-basic" label="Enter Value" variant="standard"/>}
                         </Grid>
                         <Grid item xs>
-                            <IconButton aria-label="delete" color="primary" onClick={() => props.btnDeleteClick}>
+                            <IconButton aria-label="delete" color="primary"
+                                        onClick={() => props.btnDeleteClick(props.idx)}>
                                 <Delete/>
                             </IconButton>
                         </Grid>

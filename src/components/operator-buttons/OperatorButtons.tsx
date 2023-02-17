@@ -11,16 +11,11 @@ export interface OperatorButtonsProps {
     addClick: () => void;
 }
 
-enum BtnType {
-    And = 0,
-    Or = 1,
-    None = 2
-}
-
 export default function OperatorButtons(props: OperatorButtonsProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [openMenu, setOpenMenu] = React.useState<boolean>(true);
     const [btnType, setBtnType] = React.useState<BtnType>(BtnType.None);
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setOpenMenu(true);
         setAnchorEl(event.currentTarget);
@@ -56,4 +51,11 @@ export default function OperatorButtons(props: OperatorButtonsProps) {
                 handleLogicalOperationClick={handleSelection}/>}
         </React.Fragment>
     );
+}
+
+
+enum BtnType {
+    And = 0,
+    Or = 1,
+    None = 2
 }

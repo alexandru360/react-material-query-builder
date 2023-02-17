@@ -4,22 +4,19 @@ import KeyValueEntity from "../../common/key-value-entity";
 import OperationType from "../../common/enum-operation-type";
 import LogicalCondition from "../../common/enum-logical-condition";
 import ConditionRow from "../condition-row/ConditionRow";
+import IOperationRow from "../../interfaces/IOperationRow";
+import OperatorStore from "../../services/operator-store";
+import useOperationRows from "./useOperationRows.hook";
 
-interface IConditionRow {
-    id: string;
-    logicalCondition: LogicalCondition;
-    operationType: OperationType;
-}
-
-interface IOperationRow extends IConditionRow {
+export interface IOperationsProps {
     arrFields: KeyValueEntity[];
 }
 
-export default function Operations() {
+export default function Operations(props: IOperationsProps) {
+    const conditionRows = useOperationRows();
+
     const [opButtonsProps, setOpButtonsProps] = React.useState<OperatorButtonsProps>({} as OperatorButtonsProps);
     const [btnLogicalOperation, setBtnLogicalOperation] = React.useState<LogicalCondition>(LogicalCondition.None);
-    const [btnOperationType, setBtnOperationType] = React.useState<OperationType>(OperationType.None);
-    const [conditionRows, setConditionRows] = React.useState<IOperationRow[]>([]);
 
     React.useEffect(() => {
         const opButtonsProps: OperatorButtonsProps = {
@@ -30,47 +27,33 @@ export default function Operations() {
         setOpButtonsProps(opButtonsProps);
     }, []);
 
-    React.useEffect(() => {
-        const countConditions = conditionRows.length;
+    const handleLogicalClick = (par: LogicalCondition) => setBtnLogicalOperation(par);
 
-        const storyFields = [
-            {key: 'Category', value: 'Category'},
-            {key: 'PaymentMode', value: 'Payment Mode'},
-            {key: 'Description', value: 'Description'},
-        ];
-
-        let field: IOperationRow = {} as IOperationRow;
-        if (btnOperationType == OperationType.AddCondition) {
-            field = {
-                id: countConditions === 0 ? '1' : (countConditions + 1).toString(),
+    const handleOperationClick = (par: OperationType) => {
+        // debugger
+        if (OperationType[par] == OperationType.AddCondition) {
+            const field = {
+                id: Date.now(),
                 logicalCondition: btnLogicalOperation,
                 operationType: OperationType.AddCondition,
-                arrFields: storyFields
+                arrFields: props.arrFields
             } as IOperationRow;
-            if (countConditions === 0) {
-                setConditionRows([field]);
-            } else {
-                setConditionRows([...conditionRows, field]);
-            }
+
+            OperatorStore.create(field);
         }
-    }, [btnLogicalOperation, btnOperationType]);
+    }
 
-    const handleOperationClick = (par: OperationType) => setBtnOperationType(par);
-
-    const handleLogicalClick = (par: LogicalCondition) => setBtnLogicalOperation(par);
+    const handleDeleteClick = (idx: number) => OperatorStore.delete(idx);
 
     return (
         <React.Fragment>
             <OperatorButtons {...opButtonsProps}/>
-
+            <br/>
+            <br/>
             {JSON.stringify(conditionRows)}
-
+            <br/>
             {conditionRows.map((row: IOperationRow, idx: number) =>
-                <ConditionRow
-                    key={idx}
-                    arrFields={row.arrFields}
-                    btnDeleteClick={() => {
-                    }}/>
+                <ConditionRow key={idx} arrFields={row.arrFields} btnDeleteClick={handleDeleteClick} idx={row.id}/>
             )}
         </React.Fragment>
     );

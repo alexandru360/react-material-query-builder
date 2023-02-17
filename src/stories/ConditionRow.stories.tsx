@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from "@storybook/react";
 import React from "react";
-import ConditionRow, {ConditionRowProps} from "../components/condition-row/ConditionRow";
+import ConditionRow, {IConditionRowProps} from "../components/condition-row/ConditionRow";
 
 export default {
     title: 'Query Builder/Row - operator',
@@ -20,12 +20,12 @@ const storyFields = [
 
 const operatorProps = {
     arrFields: storyFields,
-    btnDeleteClick: (value: string) => {
+    btnDeleteClick: (value: number) => {
         console.log(value);
     }
-} as ConditionRowProps;
+} as IConditionRowProps;
 
-export const Primary: ComponentStory<typeof ConditionRow> = (args: ConditionRowProps) =>
+export const Primary: ComponentStory<typeof ConditionRow> = (args: IConditionRowProps) =>
     <ConditionRow {...args}></ConditionRow>;
 
 Primary.args = operatorProps;
