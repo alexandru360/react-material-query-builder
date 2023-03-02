@@ -5,8 +5,10 @@ import OperationType from "../../common/enum-operation-type";
 import LogicalCondition from "../../common/enum-logical-condition";
 import ConditionRow from "../condition-row/ConditionRow";
 import IOperationRow from "../../interfaces/IOperationRow";
-import OperatorStore from "../../services/operator-store";
+import OperationLinesStore from "../../services/operation-lines-store";
 import useOperationRows from "./useOperationRows.hook";
+import useOperationStoreJson from "./useOperationStoreJson.hook";
+import OperationStoreJsonSql, {OperationItemWithSql} from "../../services/operations-store-json-sql";
 
 export interface IOperationsProps {
     arrFields: KeyValueEntity[];
@@ -14,6 +16,7 @@ export interface IOperationsProps {
 
 export default function Operations(props: IOperationsProps) {
     const conditionRows = useOperationRows();
+    const operations: OperationItemWithSql = useOperationStoreJson();
 
     const [opButtonsProps, setOpButtonsProps] = React.useState<OperatorButtonsProps>({} as OperatorButtonsProps);
     const [btnLogicalOperation, setBtnLogicalOperation] = React.useState<LogicalCondition>(LogicalCondition.None);
@@ -27,23 +30,25 @@ export default function Operations(props: IOperationsProps) {
         setOpButtonsProps(opButtonsProps);
     }, []);
 
-    const handleLogicalClick = (par: LogicalCondition) => setBtnLogicalOperation(par);
+    const handleLogicalClick = (par: LogicalCondition) => {
+        const newObj: OperationItemWithSql = JSON.parse(JSON.stringify(operations));
+        newObj.operation.condition = par;
+        OperationStoreJsonSql.update(newObj);
+        setBtnLogicalOperation(par);
+    };
 
     const handleOperationClick = (par: OperationType) => {
-        // debugger
-        if (OperationType[par] == OperationType.AddCondition) {
-            const field = {
-                id: Date.now(),
-                logicalCondition: btnLogicalOperation,
-                operationType: OperationType.AddCondition,
-                arrFields: props.arrFields
-            } as IOperationRow;
+        const field = {
+            id: Date.now(),
+            logicalCondition: btnLogicalOperation,
+            operationType: OperationType[par],
+            arrFields: props.arrFields
+        } as IOperationRow;
 
-            OperatorStore.create(field);
-        }
+        OperationLinesStore.create(field);
     }
 
-    const handleDeleteClick = (idx: number) => OperatorStore.delete(idx);
+    const handleDeleteClick = (idx: number) => OperationLinesStore.delete(idx);
 
     return (
         <React.Fragment>

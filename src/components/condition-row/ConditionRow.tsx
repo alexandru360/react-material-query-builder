@@ -21,8 +21,9 @@ export default function ConditionRow(props: IConditionRowProps) {
         const operatorOptions = {
             options: props.arrFields,
             label: "Select Field",
-            onChange: (value: string) => {
+            onChange: (value: any) => {
                 console.log(value);
+                handleFieldsChange(value);
                 setShowOpFlag(!showOpFlag);
             },
             width: "100%"
@@ -31,19 +32,36 @@ export default function ConditionRow(props: IConditionRowProps) {
         setCbxFieldList(operatorOptions);
     }, [props.arrFields]);
 
+    const handleFieldsChange = (value: any) => {
+        debugger
+    }
+
+    const handleOperatorChange = (value: any) => {
+        debugger
+    }
+
+    const handleValueChange = (value: any) => {
+        debugger
+    }
+
     return (
         <React.Fragment>
             <Card sx={{}}>
                 <CardContent>
                     <Grid container rowSpacing={1} spacing={1} columnSpacing={{xs: 1, sm: 2, md: 3}}>
                         <Grid item xs>
-                            {cbxFieldList && <ComboBox {...cbxFieldList} />}
+                            {cbxFieldList && <ComboBox {...cbxFieldList}/>}
                         </Grid>
                         <Grid item xs>
-                            {showOpFlag && <ComboBox {...operatorOptions} />}
+                            {showOpFlag && <ComboBox {...operatorOptions}/>}
                         </Grid>
                         <Grid item xs>
-                            {showOpFlag && <TextField id="standard-basic" label="Enter Value" variant="standard"/>}
+                            {showOpFlag &&
+                                <TextField
+                                    id="standard-basic"
+                                    label="Enter Value"
+                                    variant="standard"
+                                    />}
                         </Grid>
                         <Grid item xs>
                             <IconButton aria-label="delete" color="primary"

@@ -1,12 +1,12 @@
 import React from 'react';
 import IOperationRow from "../../interfaces/IOperationRow";
-import OperatorStore from "../../services/operator-store";
+import OperationLinesStore from "../../services/operation-lines-store";
 
 export default function useOperationRows() {
     const [conditionRows, setConditionRows] = React.useState<Array<IOperationRow>>([]);
 
     React.useEffect(() => {
-        const sub = OperatorStore.subscribe((rows: Array<IOperationRow>) => setConditionRows(rows));
+        const sub = OperationLinesStore.subscribe((rows: Array<IOperationRow>) => setConditionRows(rows));
         return () => sub.unsubscribe();
     }, []);
 

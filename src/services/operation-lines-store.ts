@@ -5,7 +5,7 @@ const subject = new Subject();
 
 let store = new Array<IOperationRow>;
 
-const OperatorStore = {
+const OperationLinesStore = {
     init: () => subject.next(store),
     create: (row: any) => {
         store = [...store, row];
@@ -21,4 +21,4 @@ const OperatorStore = {
     subscribe: (setState: any) => subject.subscribe(setState),
 };
 
-export default OperatorStore;
+export default OperationLinesStore;

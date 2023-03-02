@@ -41,12 +41,12 @@ export default function MenuAddOptions(props: IMenuAddOptionsProps) {
                     'aria-labelledby': 'basic-button',
                 }}>
 
-                <MenuItem onClick={() => handleClose(OperationType.AddGroup)}>
-                    <ListItemIcon>
-                        <ViewStream fontSize="small"/>
-                    </ListItemIcon>
-                    <ListItemText>Add group</ListItemText>
-                </MenuItem>
+                {/*<MenuItem onClick={() => handleClose(OperationType.AddGroup)}>*/}
+                {/*    <ListItemIcon>*/}
+                {/*        <ViewStream fontSize="small"/>*/}
+                {/*    </ListItemIcon>*/}
+                {/*    <ListItemText>Add group</ListItemText>*/}
+                {/*</MenuItem>*/}
                 <MenuItem onClick={() => handleClose(OperationType.AddCondition)}>
                     <ListItemIcon>
                         <Remove fontSize="small"/>

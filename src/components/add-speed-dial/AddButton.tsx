@@ -7,11 +7,12 @@ export interface AddButtonProps {
 }
 
 const actions = [
-    {icon: <ViewStream/>, name: 'Add group'},
+    // {icon: <ViewStream/>, name: 'Add group'},
     {icon: <Remove/>, name: 'Add condition'},
 ];
 
 export default function AddButton(props: AddButtonProps) {
+    console.log("actions", actions);
     return (
         <React.Fragment>
             <SpeedDial

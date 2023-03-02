@@ -4,6 +4,7 @@ import {AddCircle} from "@mui/icons-material";
 import MenuAddOptions from "../menu-add-button/MenuAddOptions";
 import LogicalCondition from "../../common/enum-logical-condition";
 import OperationType from "../../common/enum-operation-type";
+import {OperationItem} from "../../services/operations-store-json-sql";
 
 export interface OperatorButtonsProps {
     handleOperationTypeClick: (par: OperationType) => void;
