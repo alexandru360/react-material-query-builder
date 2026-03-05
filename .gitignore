@@ -1,5 +1,26 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# IDEs and editors
+.idea/
+.vs/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+.atom/
+.fleet/
+nbproject/
+.netbeans/
+
 # dependencies
 /node_modules
 /.pnp
